@@ -33,29 +33,39 @@ La distribución del krill (*Euphausia superba*) presenta dos desafíos estadís
 
 ---
 
-## 3. Interpretación de Gráficos de Evidencia
+## 3. Interpretación Detallada de Gráficos de Evidencia
 
-### 📈 Tolerancia Térmica (SST vs. Presencia)
-*   **Qué vemos:** Una bimodalidad en la presencia. Dos picos de densidad: uno en el frío extremo (~0.5°C) y otro en aguas de plataforma (~1.2°C).
-*   **Conclusión:** La temperatura actúa como un filtro de exclusión. Después de los 2°C, el hábitat deja de ser idóneo.
+### 📈 Evidencia Térmica (`evidencia_termica_krill.png`)
+*   **Análisis:** Este gráfico muestra la distribución de la Temperatura Superficial del Mar (SST) comparando sitios con presencia y ausencia de krill.
+*   **Interpretación:** Se observa un claro "techo térmico". Mientras que las ausencias se distribuyen en un rango amplio de temperaturas, las presencias se concentran masivamente por debajo de los **2.0°C**. Existe un pico de idoneidad cerca de los **0.5°C**, asociado al borde del hielo.
+*   **Conclusión para el Modelo:** La SST no es solo una variable continua, sino un **umbral crítico**. El modelo binomial utiliza este predictor para descartar áreas que, aunque tengan alimento, son térmicamente hostiles para el krill.
 
-### 📉 Efecto Comida (Clorofila vs. Presencia)
-*   **Qué vemos:** Un "salto" en la probabilidad de presencia una vez que la clorofila supera niveles basales.
-*   **Conclusión:** La clorofila es el "combustible" del modelo de abundancia, pero también un validador de presencia en primavera.
+### 📈 Evidencia de Alimento (`evidencia_comida_krill.png` y `distribucion_comida_krill.png`)
+*   **Análisis:** Estos gráficos relacionan la concentración de Clorofila-a con la densidad y presencia de krill.
+*   **Interpretación:** Se detecta un **umbral de arranque biológico (~0.12 mg/m³)**. Por debajo de este nivel, los encuentros con krill son esporádicos. La "distribución de comida" muestra que el krill tiende a seguir los filamentos de alta productividad que se desprenden de la costa.
+*   **Conclusión para el Modelo:** La clorofila valida la presencia. En el modelo binomial, asegura que las zonas de "desierto biológico" tengan una baja probabilidad de hábitat idóneo, incluso si son frías.
 
-### 📉 El Lag de Atkinson (Hielo previo vs. Krill)
-*   **Qué vemos:** Una correlación significativa (R = -0.35 en la Subárea 48.1) entre el hielo del invierno pasado y la biomasa actual.
-*   **Conclusión:** El modelo debe tener "memoria" temporal para ser preciso.
+### 📈 El Lag de Atkinson (`evidencia_lag_hielo_krill.png`)
+*   **Análisis:** Correlación entre la anomalía de la extensión de hielo marino en invierno (año *n-1*) y la abundancia de krill en verano (año *n*).
+*   **Interpretación:** El gráfico confirma una correlación positiva significativa. Años con inviernos rigurosos y gran extensión de hielo preceden a veranos con alta biomasa. Esto se debe a que el hielo actúa como guardería y fuente de alimento (diatomeas de hielo) para las larvas de krill.
+*   **Conclusión para el Modelo:** Es el predictor dinámico más potente. Sin este "lag", el modelo perdería su capacidad de capturar la variabilidad interanual del reclutamiento.
+
+### 📈 Evidencia del Talud y Profundidad (`evidencia_talud_krill.png`)
+*   **Análisis:** Muestra la densidad de krill en relación con la distancia a la isobata de -500m y la profundidad absoluta.
+*   **Interpretación:** La profundidad es una variable fundamental; el krill de la Península es un habitante de plataforma y talud. El gráfico muestra una **agregación masiva a menos de 50km del quiebre del talud continental**. A profundidades mayores a 2000m (océano abierto), la probabilidad de encontrar grandes densidades disminuye drásticamente.
+*   **Conclusión para el Modelo:** La profundidad y la distancia al talud son los "anclajes" espaciales del modelo. Definen la estructura básica del hábitat donde todas las demás variables dinámicas operan.
 
 ---
 
 ## 4. Conclusiones del Modelo Binomial (V1)
 El primer componente del Hurdle (GAM) alcanzó un **AUC-ROC de 0.9396**, lo cual es excepcionalmente alto.
 
-**Interpretación de Resultados:**
+**Interpretación de Resultados del Modelo:**
 1.  **Altísima Significancia del Hielo:** La anomalía del invierno previo es el predictor dinámico más fuerte.
 2.  **Influencia del SAM:** Confirmamos que el Modo Anular del Sur dicta la llegada de nuevas poblaciones a la Península.
-3.  **Efecto Espacial:** El suavizado (tensor product) de Latitud/Longitud indica que existen factores de transporte (corrientes) que complementan la geofísica pura.
+3.  **Importancia de la Profundidad:** El modelo confirmó que la batimetría de GEBCO es el predictor estático más robusto, superando incluso a la pendiente simple.
+4.  **Efecto Espacial:** El suavizado (tensor product) de Latitud/Longitud indica que existen factores de transporte (corrientes) que complementan la geofísica pura.
+
 
 ---
 *Este análisis asegura que el modelo no sea una "caja negra", sino una representación fiel de la oceanografía biológica antártica.*
